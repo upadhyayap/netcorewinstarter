@@ -44,5 +44,5 @@ jobs:
           cd Application
           dotnet restore
           dotnet build --configuration Release
-          dotnet test
+          dotnet test aspnet-core-dotnet-core.UnitTests/aspnet-core-dotnet-core.UnitTests.csproj
           dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Application' 
