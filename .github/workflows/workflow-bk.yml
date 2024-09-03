@@ -85,7 +85,7 @@ jobs:
     steps:
 
     - name: Download a Build Artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4.1.7
       continue-on-error: false
       with:
         name: buildartifacts
@@ -97,7 +97,7 @@ jobs:
        args: unzip -qq ./buildartifacts/Application.zip -d ./Application
 
     - name: Download an Arm template
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4.1.7
       continue-on-error: false
       with:
         name: deploymenttemplates
