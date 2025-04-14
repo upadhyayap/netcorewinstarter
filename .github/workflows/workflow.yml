@@ -19,11 +19,12 @@ jobs:
     - name: testing script
       run: |
         SCOPE="incremental"
-          REF="${{ github.base_ref }}"
-          echo $REF
-          if [[ ${{ github.ref }} =~ ^refs/heads/(main|patch/|ci-test/).* ]]; then
-             SCOPE="all"
-             REF="${{ github.ref_name }}"
-          fi
-          echo "Executing: .github/workflows/go/ci.sh -t ut -S \"$SCOPE\" -r \"$REF\""
-          .github/workflows/go/ci.sh -t ut -S "$SCOPE" -r "$REF" -b "$BRANCH"
+        REF="${{ github.base_ref }}"
+        echo $REF
+        if [[ ${{ github.ref }} =~ ^refs/heads/(maater|patch/|ci-test/).* ]]; then
+           SCOPE="all"
+           REF="${{ github.ref_name }}"
+        fi
+        echo $REF
+        echo "Executing: .github/workflows/go/ci.sh -t ut -S \"$SCOPE\" -r \"$REF\""
+        .github/workflows/go/ci.sh -t ut -S "$SCOPE" -r "$REF" -b "$BRANCH"
