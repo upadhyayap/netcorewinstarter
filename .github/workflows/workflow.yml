@@ -7,22 +7,6 @@ on:
   pull_request:
     branches:
       - '*'
-# CONFIGURATION
-# For help, go to https://github.com/Azure/Actions
-#
-# 1. Set up the following secrets in your repository:
-#   AZURE_WEBAPP_PUBLISH_PROFILE
-#
-# 2. Change these variables for your configuration:
-env:
-  AZURE_WEBAPP_NAME: "netcorestartertest"    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'             # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '3.1.302'                  # set this to the dot net version to use
-  RESOURCEGROUPNAME: "netcorestartertest-rg"
-  LOCATION: "South Central US"
-  HOSTINGPLANNAME: "netcorestartertest-plan"
-  APPINSIGHTLOCATION: "South Central US"
-  SKU: "S1 Standard"
 
 jobs:
   build:
@@ -32,14 +16,16 @@ jobs:
     # Checkout the repo
     - uses: actions/checkout@master
     
-    - name: Creating artifact directories
+    - name: testing script
       run: |
         SCOPE="incremental"
-          REF="${{ github.base_ref }}"
-          echo $REF
-          if [[ ${{ github.ref }} =~ ^refs/heads/(main|patch/|ci-test/).* ]]; then
-             SCOPE="all"
-             REF="${{ github.ref_name }}"
-          fi
-          echo "Executing: .github/workflows/go/ci.sh -t ut -S \"$SCOPE\" -r \"$REF\""
-          .github/workflows/go/ci.sh -t ut -S "$SCOPE" -r "$REF" -b "$BRANCH"
+        REF="${{ github.base_ref }}"
+        echo $REF
+        echo ${{ github.ref }}
+        if [[ ${{ github.ref }} =~ ^refs/heads/(master|patch/|ci-test/).* ]]; then
+           SCOPE="all"
+           REF="${{ github.ref_name }}"
+        fi
+        echo $REF
+        echo "Executing: .github/workflows/go/ci.sh -t ut -S \"$SCOPE\" -r \"$REF\""
+        .github/workflows/go/ci.sh -t ut -S "$SCOPE" -r "$REF" -b "$BRANCH"
