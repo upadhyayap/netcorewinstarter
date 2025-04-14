@@ -21,7 +21,7 @@ jobs:
         SCOPE="incremental"
         REF="${{ github.base_ref }}"
         echo $REF
-        if [[ ${{ github.ref }} =~ ^refs/heads/(maater|patch/|ci-test/).* ]]; then
+        if [[ ${{ github.ref }} =~ ^refs/heads/(master|patch/|ci-test/).* ]]; then
            SCOPE="all"
            REF="${{ github.ref_name }}"
         fi
